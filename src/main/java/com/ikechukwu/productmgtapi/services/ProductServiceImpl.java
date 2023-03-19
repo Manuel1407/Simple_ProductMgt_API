@@ -28,4 +28,24 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
         return "Product: " + product.getProductName() + ", has been added successfully";
     }
+
+    @Override
+    public String updateProduct(Product product) {
+        Product existingProduct = productRepository.findByProductName(product.getProductName()).orElse(product);
+        existingProduct.setProductCode(product.getProductCode());
+        existingProduct.setProductName(product.getProductName());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setManufacturer(product.getManufacturer());
+        existingProduct.setQuantityInStore(product.getQuantityInStore());
+        productRepository.save(existingProduct);
+        return "Product: " + product.getProductName() + ", has been updated.";
+
+//        existingProduct.setProductCode(productDTO.getProductCode());
+//        existingProduct.setProductName(productDTO.getProductName());
+//        existingProduct.setPrice(productDTO.getPrice());
+//        existingProduct.setManufacturer(productDTO.getManufacturer());
+//        existingProduct.setStatus(productDTO.getStatus());
+//        existingProduct.setQuantityInStore(productDTO.getQuantityInStore());
+//        return productRepository.save(existingProduct);
+    }
 }
