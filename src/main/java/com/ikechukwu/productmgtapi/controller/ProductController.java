@@ -5,9 +5,7 @@ import com.ikechukwu.productmgtapi.entity.Product;
 import com.ikechukwu.productmgtapi.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -25,5 +23,12 @@ public class ProductController {
     public String updateProduct(@RequestBody Product product) {
         return productService.updateProduct(product);
     }
+
+    @GetMapping("fetch-product/{code}")
+    public Product fetchProductByCode(@PathVariable String code){
+        return productService.getProduct(code);
+    }
+
+
 
 }

@@ -8,4 +8,6 @@ public interface ProductService {
     public String saveProduct(ProductDTO productdto);
 
     public String updateProduct(Product product);
+
+    public Product getProduct(String uuid);
 }

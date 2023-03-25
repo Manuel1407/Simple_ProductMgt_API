@@ -2,6 +2,7 @@ package com.ikechukwu.productmgtapi.services;
 
 import com.ikechukwu.productmgtapi.dto.ProductDTO;
 import com.ikechukwu.productmgtapi.entity.Product;
+import com.ikechukwu.productmgtapi.exceptions.ProductNotFoundException;
 import com.ikechukwu.productmgtapi.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,19 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(existingProduct);
         return "Product: " + product.getProductName() + ", has been updated.";
 
-//        existingProduct.setProductCode(productDTO.getProductCode());
-//        existingProduct.setProductName(productDTO.getProductName());
-//        existingProduct.setPrice(productDTO.getPrice());
-//        existingProduct.setManufacturer(productDTO.getManufacturer());
-//        existingProduct.setStatus(productDTO.getStatus());
-//        existingProduct.setQuantityInStore(productDTO.getQuantityInStore());
-//        return productRepository.save(existingProduct);
+    }
+
+    @Override
+    public Product getProduct(String uuid) {
+        try{
+            Product product = productRepository.findProductByCode(UUID.fromString(uuid));
+            if (product == null) {
+                throw new ProductNotFoundException("Product with code: " + uuid + ", not found.");
+            } else {
+                return product;
+            }
+        } catch (Exception ex){
+            return getProduct(uuid);
+        }
     }
 }
