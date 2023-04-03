@@ -44,4 +44,9 @@ public class ProductController {
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 
+    @GetMapping("fetch-products-with-price-above-hundred")
+    public ResponseEntity<APIResponse<List<Product>>> fetchProductsWithPriceAboveHundred() {
+        return ResponseEntity.ok(productService.getProductsWithPriceAboveHundred());
+    }
+
 }

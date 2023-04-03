@@ -17,4 +17,6 @@ public interface ProductService {
     APIResponse<List<Product>> searchProductByName(String name);
 
     APIResponse<Product> deleteProduct(Long id);
+
+    APIResponse<List<Product>> getProductsWithPriceAboveHundred();
 }
