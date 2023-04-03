@@ -77,4 +77,16 @@ public class ProductServiceImpl implements ProductService{
             return new APIResponse<>(true, ex.getMessage(), null);
         }
     }
+
+    @Override
+    public APIResponse<Product> deleteProduct(Long id) {
+         try {
+             Product product = productRepository.findById(id)
+                     .orElseThrow(() -> new ProductNotFoundException("Product not found."));
+             productRepository.delete(product);
+             return new APIResponse<Product>(true, "Product Deleted Successfully", null);
+         } catch (Exception ex) {
+             return new APIResponse<>(true, ex.getMessage(), null);
+         }
+    }
 }

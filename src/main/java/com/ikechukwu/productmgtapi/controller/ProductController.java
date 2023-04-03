@@ -39,6 +39,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.searchProductByName(name));
     }
 
-
+    public ResponseEntity<APIResponse<Product>> deleteProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.deleteProduct(id));
+    }
 
 }
