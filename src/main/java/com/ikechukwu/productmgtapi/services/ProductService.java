@@ -2,12 +2,17 @@ package com.ikechukwu.productmgtapi.services;
 
 import com.ikechukwu.productmgtapi.dto.ProductDTO;
 import com.ikechukwu.productmgtapi.entity.Product;
+import com.ikechukwu.productmgtapi.response.APIResponse;
+
+import java.util.List;
 
 public interface ProductService {
 
-    public String saveProduct(ProductDTO productdto);
+    APIResponse<Product> saveProduct(ProductDTO productdto);
 
-    public String updateProduct(Product product);
+    APIResponse<Product> updateProduct(Long id, ProductDTO productDTO);
 
-    public Product getProduct(String uuid);
+    APIResponse<Product> getProduct(String uuid);
+
+    APIResponse<List<Product>> searchProductByName(String name);
 }
